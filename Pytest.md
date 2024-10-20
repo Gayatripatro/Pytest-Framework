@@ -77,9 +77,66 @@
             second
             third
             fourth
+            dependency
+            Sanity
+            Regression
 
-. we can mention dependent test cases : ()
+. we can mention dependent test cases : (If our test cases depend on any other test cases and if that test case fails then we should skip the dependent test cases so that it will save our time)
+      > **"@pytest.mark.dependency(depends=['clssname::test_methods'])"**
+      > or **"@pytest.mark.dependency(depends=['clssname::test_methods1','clssname::test_methods2'])"**
+      > If there is multiple dependency methods are there then if 1 test cases also failed means the dependent test cases will be Skipped
+      > need to add **"dependency"** keyword in the pytest.ini file
 
-. Parallel testing
+      > in test_depedency.py file
+      ------------------------------------
+      import pytest
+      class TestLogin:
+            @pytest.mark.dependency()
+            def test_openApp(self):
+                  assert False
+                  
+            @pytest.mark.dependency('depends=['TestLogin::test_openApp')
+            def test_login(self):
+                  assert True
+                  
+            @pytest.mark.dependency('depends=['TestLogin::test_openApp','TestLogin::test_login')
+            def test_search(self):
+                  assert True
+             
+              
 
-. Group the test cases
+. Grouping testing : ( We can group our test cases as Sanity, regression or both sanity and regression and all so that according to our requirement we can execute the test cases)
+      > **"@pytest.mark.Sanity"** 
+      > **"@pytest.mark.Regression"** 
+
+      > ** Execution Details**
+            pytest -v -s -m "Regression" algoQATcs\test_Grouping.py            
+            pytest -v -s -m "Regression and Sanity" algoQATcs\test_Grouping.py
+            pytest -v -s -m "not Regression" algoQATcs\test_Grouping.py   # it will execute only sanity Tcs
+
+
+
+
+      > in test_Grouping.py file
+      ------------------------------------
+      import pytest
+      class TestLogin:
+            @pytest.mark.Sanity
+            def test_openApp(self):
+                  assert False
+                  
+            @pytest.mark.Regression
+            def test_login(self):
+                  assert True
+                  
+            @pytest.mark.Sanity
+            @pytest.mark.Regression
+            def test_search(self):
+                  assert True
+      
+
+      
+      
+      
+
+. Parallel test cases execution :
