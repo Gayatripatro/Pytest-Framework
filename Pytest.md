@@ -16,16 +16,24 @@
 
 > EX:
 > 
+      inside conftest.py file
+      ---------------------------------------------------------------
+      import pytest
       @pytest.fixture()  # decorator
-      def setup(self):   
+      def setup():   
         print("Lunching the browser")  # Execuute once before every test method
         print("Opening the URL")        # Execuute once before every test method
         yield
         print("Closing the browser")    # Execuute once after every test method
-      def test_loginwithvalidcredentials(self,setup):
-        print("Login successfully")
-      def loginwithwrongcredentials(self):
-        print("Please enter correct credentials")
+
+      inside test_login.py files
+      ----------------------------------------------------------------------
+      import pytest
+      Class TestLogin:
+            def test_loginWithValidCredentials(self,setup):
+                  print("Login successfully")
+            def loginwithwrongcredentials(self):
+                  print("Please enter correct credentials")
 
 
 # Run Commands:
@@ -35,4 +43,43 @@
 > EX : pytest -v -s algoQATCs\test_login.py
 
 
-#### For running a
+#### For running a single module:
+> **pytest -v -s Filename\modules\module name.py**
+
+> EX : pytest -v -s algoQATCs\modules\test_login.py
+
+
+#### For running all the modules at a time:
+> **pytest -v -s Filename\modules*
+
+> EX : pytest -v -s algoQATCs\modules
+
+#### For running a specific method from a module:
+> **pytest -v -s Filename\modules\module name.py::class name::methodname**
+
+> EX : pytest -v -s algoQATCs\modules\test_login.py::TestLogin::test_loginWithValidCredentials
+
+.
+
+# Benifit of using pytest
+. we can skip the test cases (If you want to skip any test cases/methods before that method you need to use **"@pytest.mark.skip"** then it will not execute)
+
+. we can order the test cases (Which sequence you need to execute your test cases accordingly u need to update as **"@pytest.mark.forst" or "@pytest.mark.second" and all**)
+      > For ordering you need to create a file with the name as **"pytest.ini"** in that you need to update all the customized markers so that pytest will identify it easily while execution
+      > Need to install **"pytest_ordering"** package for ordering test cases execute 
+      > or u can use **"@pytest.mark.run(order=1)"** like this
+      
+      > in pytest.ini file
+      -------------------------------------------
+      [pytest]
+      markers=
+            first
+            second
+            third
+            fourth
+
+. we can mention dependent test cases : ()
+
+. Parallel testing
+
+. Group the test cases
