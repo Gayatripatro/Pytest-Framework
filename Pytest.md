@@ -12,7 +12,7 @@
 > 
 > Even if you want to execute some code after the test cases are executed also you can mention in the same fixture method using **yield** (So before yield method whatever it will be there will execute before the test cases are executed and after the yield whatever you mentioned it will execute after the test cases executed)
 >
-> Inside **conftest.py** only you have to write the setup methods so that from any where of your project you can access those data
+> Inside **conftest.py** only you have to write the setup methods so that from anywhere in your project you can access those data
 
 > EX:
 > 
@@ -59,14 +59,25 @@
 
 > EX : pytest -v -s algoQATCs\modules\test_login.py::TestLogin::test_loginWithValidCredentials
 
-.
+#### For execute test cases in a group
+> pytest -v -s -m "Regression" algoQATcs\test_Grouping.py
+        
+> pytest -v -s -m "Regression and Sanity" algoQATcs\test_Grouping.py
+
+> pytest -v -s -m "not Regression" algoQATcs\test_Grouping.py   # it will execute only sanity Tcs
+
+
+#### For running test cases parallel
+> pytest -n=3 -v -s algoQATcs\test_parallel.py
+
+
 
 # Benifit of using pytest
 . we can skip the test cases (If you want to skip any test cases/methods before that method you need to use **"@pytest.mark.skip"** then it will not execute)
 
 . we can order the test cases (Which sequence you need to execute your test cases accordingly u need to update as **"@pytest.mark.forst" or "@pytest.mark.second" and all**)
       > For ordering you need to create a file with the name as **"pytest.ini"** in that you need to update all the customized markers so that pytest will identify it easily while execution
-      > Need to install **"pytest_ordering"** package for ordering test cases execute 
+      > Need to install **"pytest-ordering"** package for ordering test cases execute 
       > or u can use **"@pytest.mark.run(order=1)"** like this
       
       > in pytest.ini file
@@ -140,3 +151,7 @@
       
 
 . Parallel test cases execution :
+      > need to install package : **pytest-xdist**
+      
+      > pytest -n=3 -v -s algoQATcs\test_parallel.py
+
