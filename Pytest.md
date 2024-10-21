@@ -76,9 +76,12 @@
 . we can skip the test cases (If you want to skip any test cases/methods before that method you need to use **"@pytest.mark.skip"** then it will not execute)
 
 . we can order the test cases (Which sequence you need to execute your test cases accordingly u need to update as **"@pytest.mark.forst" or "@pytest.mark.second" and all**)
-      > For ordering you need to create a file with the name as **"pytest.ini"** in that you need to update all the customized markers so that pytest will identify it easily while execution
-      > Need to install **"pytest-ordering"** package for ordering test cases execute 
-      > or u can use **"@pytest.mark.run(order=1)"** like this
+
+> For ordering you need to create a file with the name as **"pytest.ini"** in that you need to update all the customized markers so that pytest will identify it easily while execution
+      
+> Need to install **"pytest-ordering"** package for ordering test cases execute 
+      
+> or u can use **"@pytest.mark.run(order=1)"** like this
       
       > in pytest.ini file
       -------------------------------------------
@@ -93,10 +96,14 @@
             Regression
 
 . we can mention dependent test cases : (If our test cases depend on any other test cases and if that test case fails then we should skip the dependent test cases so that it will save our time)
-      > **"@pytest.mark.dependency(depends=['clssname::test_methods'])"**
-      > or **"@pytest.mark.dependency(depends=['clssname::test_methods1','clssname::test_methods2'])"**
-      > If there is multiple dependency methods are there then if 1 test cases also failed means the dependent test cases will be Skipped
-      > need to add **"dependency"** keyword in the pytest.ini file
+
+> **"@pytest.mark.dependency(depends=['clssname::test_methods'])"**
+
+> or **"@pytest.mark.dependency(depends=['clssname::test_methods1','clssname::test_methods2'])"**
+
+> If there is multiple dependency methods are there then if 1 test cases also failed means the dependent test cases will be Skipped
+
+> need to add **"dependency"** keyword in the pytest.ini file
 
       > in test_depedency.py file
       ------------------------------------
@@ -117,8 +124,10 @@
               
 
 . Grouping testing : ( We can group our test cases as Sanity, regression or both sanity and regression and all so that according to our requirement we can execute the test cases)
-      > **"@pytest.mark.Sanity"** 
-      > **"@pytest.mark.Regression"** 
+
+> **"@pytest.mark.Sanity"**
+
+> **"@pytest.mark.Regression"** 
 
       > ** Execution Details**
             pytest -v -s -m "Regression" algoQATcs\test_Grouping.py            
@@ -151,7 +160,8 @@
       
 
 . Parallel test cases execution :
-      > need to install package : **pytest-xdist**
+
+> need to install package : **pytest-xdist**
       
       > pytest -n=3 -v -s algoQATcs\test_parallel.py
 
