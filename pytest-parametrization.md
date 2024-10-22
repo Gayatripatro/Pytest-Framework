@@ -4,5 +4,12 @@
 
     > in parametrizations.py files
     --------------------------------------------------
-    
+    class TestClass:
+        @pytest.mark.parametrize('user,pwd',[("Admin","admin123"),("Adm","admin123"),("Admin","admin")])
+        def test_Login(self,user,pwd):
+            self.driver= WebDriver.Chrome()
+            self.driver.get("application use")
+            ............
+
+        
   
